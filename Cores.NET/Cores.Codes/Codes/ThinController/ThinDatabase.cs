@@ -542,7 +542,7 @@ namespace IPA.Cores.Codes
             int numError = 0;
 
             $"ThinDatabase.ReadMainLoopAsync: Waiting for start."._Debug();
-            await TaskUtil.AwaitWithPollAsync(Timeout.Infinite, 1000, () => this.IsStarted, cancel);
+            await TaskUtil.AwaitWithPollAsync(10000, 1000, () => this.IsStarted, cancel); //初期化時に止まるため、Timeout.Infinite→10000に変更。とりあえず動かすための緊急避難。
             $"ThinDatabase.ReadMainLoopAsync: Started."._Debug();
 
             while (cancel.IsCancellationRequested == false)
@@ -624,7 +624,7 @@ namespace IPA.Cores.Codes
             int numError = 0;
 
             $"ThinDatabase.WriteMainLoopAsync: Waiting for start."._Debug();
-            await TaskUtil.AwaitWithPollAsync(Timeout.Infinite, 1000, () => this.IsStarted, cancel);
+            await TaskUtil.AwaitWithPollAsync(10000, 1000, () => this.IsStarted, cancel);//初期化時に止まるため、Timeout.Infinite→10000に変更。とりあえず動かすための緊急避難。
             $"ThinDatabase.WriteMainLoopAsync: Started."._Debug();
 
             while (cancel.IsCancellationRequested == false)
